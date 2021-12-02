@@ -1,0 +1,18 @@
+CREATE TABLE board.board_tb (
+	idx INT NOT NULL COMMENT '번호 (PK)',
+	title varchar(100) NOT NULL COMMENT '제목',
+	content VARCHAR(3000) NOT NULL COMMENT '내용',
+	writer varchar(20) NOT NULL COMMENT '작성자',
+	view_cnt INT DEFAULT 0 NOT NULL COMMENT '조회 수',
+	notice_yn ENUM('Y', 'N') DEFAULT 'N' NOT NULL COMMENT '공지글 여부',
+	secret_yn ENUM('Y', 'N') DEFAULT 'N' NOT NULL COMMENT '비밀글 여부',
+	delete_yn ENUM('Y', 'N') DEFAULT 'N' NOT NULL COMMENT '삭제 여부',
+	insert_time DATETIME DEFAULT NOW() NOT NULL,
+	update_time DATETIME NULL COMMENT '수정일',
+	delete_time DATETIME NULL COMMENT '삭제일',
+	CONSTRAINT board_tb_pk PRIMARY KEY (idx)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8
+COLLATE=utf8_general_ci
+COMMENT='게시판';
