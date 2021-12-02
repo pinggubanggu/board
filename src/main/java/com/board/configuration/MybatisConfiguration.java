@@ -17,7 +17,7 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @PropertySource("classpath:/application.properties")
-public class DBConfiguration {
+public class MybatisConfiguration {
 	
 	@Autowired
 	private ApplicationContext applicationContext;

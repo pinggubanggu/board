@@ -4,91 +4,90 @@
 <mapper namespace="com.board.mapper.BoardMapper">
 
 	<sql id="boardColumns">
-				  idx
-				, title
-				, content
-				, writer
-				, view_cnt
-				, notice_yn
-				, secret_yn
-				, delete_yn
-				, insert_time
-				, update_time
-				, delete_time
+		  idx
+		, title
+		, content
+		, writer
+		, view_cnt
+		, notice_yn
+		, secret_yn
+		, delete_yn
+		, insert_time
+		, update_time
+		, delete_time
 	</sql>
 	
 	<insert id="insertBoard" parameterType="BoardDTO">
-			INSERT INTO board_tb (
-					<include refid="boardColumns" />
-			) VALUES (
-					      #{idx}
-						, #{title}
-						, #{content}
-						, #{writer}
-						, 0
-						, IFNULL(#{noticeYn}, 'N')
-						, IFNULL(#{secretYn}, 'N')
-						, 'N'
-						, NOW()
-						, NULL
-						, NULL
-			)
+		INSERT INTO board_tb (
+		<include refid="boardColumns" />
+		) VALUES (
+	      #{idx}
+		, #{title}
+		, #{content}
+		, #{writer}
+		, 0
+		, IFNULL(#{noticeYn}, 'N')
+		, IFNULL(#{secretYn}, 'N')
+		, 'N'
+		, NOW()
+		, NULL
+		, NULL
+		)
 	</insert>
 	
 	<select id="selectBoardDetail" parameterType="long" resultType="BoardDTO">
-			SELECT 
-					<include refid="boardColumns" />
-			FROM
-					board_tb
-			WHERE 		
-					delete_yn= 'N'
-			AND 
-					idx = #{idx}
-					
+		SELECT 
+		<include refid="boardColumns" />
+		FROM
+		board_tb
+		WHERE 		
+		delete_yn= 'N'
+		AND 
+		idx = #{idx}
 	</select>
 	
 	<update id="updateBoard" parameterType="BoardDTO">
 			UPDATE board_tb 
 			SET
-					update_time = NOW()
-				  , title = #{title}
-				  , content = #{content}
-				  , writer = #{writer}
-				  , notice_yn = IFNULL(#{noticeYn}, 'N')
-				  , secret_yn = IFNULL(#{secretYn}, 'N')
+			update_time = NOW()
+		    , title = #{title}
+		    , content = #{content}
+		    , writer = #{writer}
+		    , notice_yn = IFNULL(#{noticeYn}, 'N')
+		    , secret_yn = IFNULL(#{secretYn}, 'N')
 			WHERE
-					idx = #{idx}
+			idx = #{idx}
 	</update>
 	
 	<update id="deleteBoard" parameterType="long">
 			UPDATE board_tb
 			SET
-					delete_yn ='Y'
-				  , delete_time = NOW()
+			delete_yn ='Y'
+			, delete_time = NOW()
 			WHERE
-					idx = #{idx}
+			idx = #{idx}
 	</update>
 	
 	<select id="selectBoardList" parameterType="BoardDTO" resultType="BoardDTO">
 			SELECT
-					<include refid="boardColumns" />
+			<include refid="boardColumns" />
 			FROM
-					board_tb
+			board_tb
 			WHERE
-					delete_yn = 'N'
+			delete_yn = 'N'
 			ORDER BY
-					notice_yn ASC,
-					idx DESC,
-					insert_time DESC
+			notice_yn ASC,
+			idx DESC,
+			insert_time DESC
 	</select>
 	
 	<select id="selectBoardTotalCount" parameterType="BoardDTO" resultType="int">
 			SELECT
-					COUNT(*)
+			COUNT(*)
 			FROM
-					board_tb
+			board_tb
 			WHERE
-					delete_yn = 'N'
+			delete_yn = 'N'
 	</select>
 
 </mapper>
