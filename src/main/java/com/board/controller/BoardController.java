@@ -37,7 +37,7 @@ public class BoardController {
     try {
       boolean isRegistered = boardService.registerBoard(params);
       if (isRegistered == false) {
-        // TODO => 게시글 등록에 실패하였ㅅ다는 메시지를 전달
+        // TODO => 게시글 등록에 실패하였다는 메시지를 전달
       }
     } catch (DataAccessException e) {
       // TODO => 데이터베이스 처리 과정에 문제가 발생하였다는 메시지를 전달
